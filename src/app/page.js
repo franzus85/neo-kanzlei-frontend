@@ -1,15 +1,12 @@
 import styles from "./page.module.css";
-import Strapi from "./strapi/api";
+import StrapiClient from "./strapi/client";
 
 export default async function Home() {
-  const { data, meta } = await Strapi("todos");
-  data.map((item) => {
-    console.log(item.attributes.todo);
-  });
+  const { data, meta } = await StrapiClient("todos");
   return (
     <main className={styles.main}>
-      {data.map((item) => (
-        <p>{item.attributes.todo}</p>
+      {data.map((item, index) => (
+        <p key={index}>{item.attributes.todo}</p>
       ))}
     </main>
   );
